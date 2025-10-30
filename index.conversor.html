@@ -1,0 +1,102 @@
+index.html
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Conversor de Longitud</title>
+  <style>
+    body {
+      background-color: pink; /* Fondo rosa */
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;  /* Centra verticalmente */
+      margin: 0;
+      font-family: Arial, sans-serif;
+    }
+
+    .contenedor {
+      text-align: center;
+      background: white;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    }
+
+    input, select, button {
+      margin: 10px;
+      padding: 10px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      font-size: 16px;
+    }
+
+    button {
+      background: #ff66b2;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: #e60073;
+    }
+
+    #resultado {
+      margin-top: 20px;
+      font-weight: bold;
+      color: #333;
+    }
+  </style>
+</head>
+<body>
+  <div class="contenedor">
+    <h1>Conversor de Longitud</h1>
+
+    <input type="number" id="valor" placeholder="Escribe un número">
+    
+    <select id="unidad">
+      <option value="km">Kilómetros</option>
+      <option value="m">Metros</option>
+      <option value="cm">Centímetros</option>
+    </select>
+
+    <br>
+    <button onclick="convertir()">Convertir</button>
+
+    <p id="resultado"></p>
+  </div>
+
+  <script>
+    function convertir() {
+      const valor = parseFloat(document.getElementById("valor").value);
+      const unidad = document.getElementById("unidad").value;
+      let km, m, cm;
+
+      if (isNaN(valor)) {
+        document.getElementById("resultado").innerText = "⚠️ Ingresa un número válido.";
+        return;
+      }
+
+      if (unidad === "km") {
+        km = valor;
+        m = valor * 1000;
+        cm = valor * 100000;
+      } else if (unidad === "m") {
+        km = valor / 1000;
+        m = valor;
+        cm = valor * 100;
+      } else if (unidad === "cm") {
+        km = valor / 100000;
+        m = valor / 100;
+        cm = valor;
+      }
+
+      document.getElementById("resultado").innerHTML =
+        `<strong>Kilómetros:</strong> ${km}<br>
+         <strong>Metros:</strong> ${m}<br>
+         <strong>Centímetros:</strong> ${cm}`;
+    }
+  </script>
+</body>
+</html>
